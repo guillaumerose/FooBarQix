@@ -44,4 +44,10 @@ public class FooBarQix {
             return ASSOC.get(Integer.valueOf(input));
         }
     };
+    
+    public static void main(String[] args) {
+        for (int i = 1; i < 100; i++) {
+            System.out.println(eval(i));
+        }
+    }
 }
