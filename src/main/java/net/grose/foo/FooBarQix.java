@@ -13,17 +13,16 @@ import java.util.Map;
 import com.google.common.base.Function;
 import com.google.common.base.Joiner;
 import com.google.common.base.Predicate;
-import com.google.common.collect.Maps;
+import com.google.common.collect.ImmutableMap;
 
 public class FooBarQix {
+    private static final Map<Integer, String> ASSOC = ImmutableMap.of(3, "Foo", 
+                                                                      5, "Bar",
+                                                                      7, "Qix");
+    
     public static String eval(final Integer i) {
-        final Map<Integer, String> association = Maps.newHashMap();
-        association.put(3, "Foo");
-        association.put(5, "Bar");
-        association.put(7, "Qix");
-
-        List<String> symbols = newArrayList(filterKeys(association, divisorOf(i)).values());
-        symbols.addAll(filter(transform(lettersOf(i), toSymbol(association)), notNull()));
+        List<String> symbols = newArrayList(filterKeys(ASSOC, divisorOf(i)).values());
+        symbols.addAll(filter(transform(lettersOf(i), TO_SYMBOL), notNull()));
         
         return symbols.isEmpty() ? String.valueOf(i) : Joiner.on("").join(symbols);
     }
@@ -40,11 +39,9 @@ public class FooBarQix {
         return asList(String.valueOf(i).split("", 1));
     }
 
-    private static Function<String, String> toSymbol(final Map<Integer, String> association) {
-        return new Function<String, String>() {
-            @Override public String apply(String input) {
-                return association.get(Integer.valueOf(input));
-            }
-        };
-    }
+    private static Function<String, String> TO_SYMBOL = new Function<String, String>() {
+        @Override public String apply(String input) {
+            return ASSOC.get(Integer.valueOf(input));
+        }
+    };
 }
