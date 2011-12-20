@@ -13,12 +13,12 @@ import java.util.Map;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
-import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.ImmutableSortedMap;
 
 public class FooBarQix {
-    private static final Map<Integer, String> INT_TO_SYM = ImmutableMap.of(3, "Foo", 
-                                                                           5, "Bar",
-                                                                           7, "Qix");
+    private static final Map<Integer, String> INT_TO_SYM = ImmutableSortedMap.of(3, "Foo", 
+                                                                                 5, "Bar",
+                                                                                 7, "Qix");
     
     public static String eval(final Integer i) {
         List<String> symbols = newArrayList();
